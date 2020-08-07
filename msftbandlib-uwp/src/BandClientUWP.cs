@@ -1,43 +1,41 @@
-using MSFTBandLib;
-using MSFTBandLib.Libs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Rfcomm;
+using MSFTBandLib.Contracts.Band;
+using MSFTBandLib.Contracts.Constants;
 
-namespace MSFTBandLib.UWP {
+namespace MSFTBandLib.UWP
+{
 
-/// <summary>
-/// MSFTBandLib UWP implementation
-/// </summary>
-public class BandClientUWP : IBandClientInterface {
+    /// <summary>
+    /// MSFTBandLib UWP implementation
+    /// </summary>
+    public class BandClientUWP : IBandClientInterface
+    {
 
-	/// <summary>
-	///	Get list of all available paired Bands.
-	/// </summary>
-	/// <returns>Task<List<Band>></returns>
-	public async Task<List<IBandInterface>> GetPairedBands() {
-		string selector;
-		RfcommServiceId cargo;
-		DeviceInformationCollection devices;
-		List<IBandInterface> bands = new List<IBandInterface>();
+        /// <summary>
+        ///	Get list of all available paired Bands.
+        /// </summary>
+        /// <returns>Task<List<Band>></returns>
+        public async Task<List<IBandInterface>> GetPairedBands()
+        {
+            var bands = new List<IBandInterface>();
 
-		// Get devices
-		cargo = RfcommServiceId.FromUuid(Guid.Parse(Services.CARGO));
-		selector = RfcommDeviceService.GetDeviceSelector(cargo);
-		devices = await DeviceInformation.FindAllAsync(selector);
+            // Get devices
+            var cargo = RfcommServiceId.FromUuid(Guid.Parse(BluetoothServices.CARGO));
+            var selector = RfcommDeviceService.GetDeviceSelector(cargo);
+            var devices = await DeviceInformation.FindAllAsync(selector);
 
-		// Create Band instances
-		foreach (DeviceInformation device in devices) {
-			BluetoothDevice bt;
-			bt = await BluetoothDevice.FromIdAsync(device.Id);
-			bands.Add(new Band<BandSocketUWP>(bt.HostName.ToString(), bt.Name));
-		}
-		return bands;
-	}
-
-}
-
+            // Create Band instances
+            foreach (var device in devices)
+            {
+                var bt = await BluetoothDevice.FromIdAsync(device.Id);
+                bands.Add(new Band<BandSocketUWP>(bt.HostName.ToString(), bt.Name));
+            }
+            return bands;
+        }
+    }
 }

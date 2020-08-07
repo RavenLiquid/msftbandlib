@@ -1,3 +1,5 @@
+using MSFTBandLib.Shared.Attributes;
+
 namespace MSFTBandLib.Contracts.Types
 {
     /// <summary>
@@ -19,7 +21,7 @@ namespace MSFTBandLib.Contracts.Types
 
         GetDeviceName = 30339,
 
-        //[CommandDataSize(16)] 
+        [CommandDataSize(16)] 
         GetDeviceTime = 30082,
 
         GetLogVersion = 30341,
@@ -34,14 +36,14 @@ namespace MSFTBandLib.Contracts.Types
 
         GetSdkVersion = 30215,
 
-        //[CommandDataSize(12)] 
+        [CommandDataSize(12)] 
         GetSerialNumber = 30856,
 
         GetSettingsMask = 54413,
 
         GetStatisticsRun = 52866,
 
-        //[CommandDataSize(54)] 
+        [CommandDataSize(54)] 
         GetStatisticsSleep = 52868,
 
         GetStatisticsWorkout = 52867,
@@ -84,7 +86,7 @@ namespace MSFTBandLib.Contracts.Types
 
         SetSettingsMask = 54286,
 
-        //[CommandDataSize(24)] 
+        [CommandDataSize(24)] 
         SetThemeColor = 55296,
 
         SetTile = 54278,

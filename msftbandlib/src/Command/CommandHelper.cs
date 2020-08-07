@@ -1,7 +1,7 @@
-using MSFTBandLib.Facility;
 using MSFTBandLib.Includes;
 using System.Reflection;
 using MSFTBandLib.Contracts.Types;
+using MSFTBandLib.Shared.Attributes;
 
 namespace MSFTBandLib.Command
 {
