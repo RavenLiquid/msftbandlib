@@ -32,6 +32,7 @@ namespace MSFTBandLib.Contracts.Types
 
         GetMeTileImage = 50062,
 
+        [CommandDataSize(4)]
         GetMeTileImageId = 51858,
 
         GetSdkVersion = 30215,
