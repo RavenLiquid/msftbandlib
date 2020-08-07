@@ -1,93 +1,100 @@
-using MSFTBandLib.Command;
+using MSFTBandLib.Contracts.Command;
+using MSFTBandLib.Contracts.Types;
 using MSFTBandLib.Includes;
-using System;
-using System.IO;
 
-namespace MSFTBandLib.Command {
+namespace MSFTBandLib.Command
+{
+    /// <summary>
+    /// Command packet class
+    /// </summary>
+    public class CommandPacket : ICommandPacket
+    {
 
-/// <summary>Command packet class</summary>
-public class CommandPacket {
+        /// <summary>
+        /// Command
+        /// </summary>
+        protected CommandEnum Command;
 
-	/// <summary>Command</summary>
-	protected CommandEnum Command;
+        /// <summary>
+        /// Arguments
+        /// </summary>
+        protected byte[] Arguments;
 
-	/// <summary>Arguments</summary>
-	protected byte[] args = null;
+        /// <summary>
+        /// Data
+        /// </summary>
+        protected byte[] Data;
 
+        /// <summary>
+        /// Create new command packet.
+        /// 
+        /// When no arguments are given, uses the command's default arguments.
+        /// </summary>
+        /// <param name="command">Command</param>
+        /// <param name="arguments">Arguments</param>
+        /// <param name="data">Data</param>
+        public CommandPacket(CommandEnum command, byte[] arguments = null, byte[] data = null)
+        {
 
-	/// <summary>
-	/// Create new command packet.
-	/// 
-	/// When no arguments are given, uses the command's default arguments.
-	/// </summary>
-	/// <param name="command">Command</param>
-	/// <param name="args">Arguments</param>
-	public CommandPacket(CommandEnum command, byte[] args=null) {
+            // Command
+            Command = command;
 
-		// Command
-		this.Command = command;
+            // Use default for command when no arguments given
+            Arguments = arguments ?? GetCommandDefaultArgumentsBytes();
 
-		// Use default for command when no arguments given
-		if (args != null) this.args = args;
-		else this.args = this.GetCommandDefaultArgumentsBytes();
+            Data = data;
+        }
 
-	}
+        /// <summary>
+        /// Get the expected data/response size for the command.
+        /// </summary>
+        /// <returns>int</returns>
+        public int GetCommandDataSize()
+        {
+            return CommandHelper.GetCommandDataSize(Command);
+        }
 
+        /// <summary>
+        /// Get array of bytes defining size of the arguments to send.
+        /// 
+        /// TODO: Why is `8` required as base?
+        /// </summary>
+        /// <returns>byte[]</returns>
+        public byte[] GetArgsSizeBytes() => new[] {(byte) (8 + Arguments.Length)};
 
-	/// <summary>
-	/// Get the expected data/response size for the command.
-	/// </summary>
-	/// <returns>int</returns>
-	public int GetCommandDataSize() {
-		return CommandHelper.GetCommandDataSize(this.Command);
-	}
+        /// <summary>
+        /// Get the array of bytes to use as the default arguments for 
+        /// the command when no arguments are given.
+        /// </summary>
+        /// <returns>byte[]</returns>
+        public byte[] GetCommandDefaultArgumentsBytes() => CommandHelper.GetCommandDefaultArgumentsBytes(Command);
 
+        /// <summary>
+        /// Get command packet bytes to send.
+        /// 
+        /// Packet is structured as:
+        /// 	- Expected data/response size bytes
+        /// 	- `12025` `ushort` constant (TODO: what is this for?)
+        /// 	- Command `ushort`
+        /// 	- Expected data/response size as integer
+        /// 	- Arguments (when none given explicitly, is data size again)
+        /// 	
+        /// Returns the array of bytes to send to the Band.
+        /// </summary>
+        /// <returns>byte[]</returns>
+        public byte[] GetBytes()
+        {
+            var bytes = new ByteStream();
+            bytes.BinaryWriter.Write(GetArgsSizeBytes());
+            bytes.BinaryWriter.Write((ushort) 12025);
+            bytes.BinaryWriter.Write((ushort) Command);
+            bytes.BinaryWriter.Write(GetCommandDataSize());
+            bytes.BinaryWriter.Write(Arguments);
 
-	/// <summary>
-	/// Get array of bytes defining size of the arguments to send.
-	/// 
-	/// TODO: Why is `8` required as base?
-	/// </summary>
-	/// <returns>byte[]</returns>
-	public byte[] GetArgsSizeBytes() {
-		return new byte[] { (byte) (8 + this.args.Length) };
-	}
-
-
-	/// <summary>
-	/// Get the array of bytes to use as the default arguments for 
-	/// the command when no arguments are given.
-	/// </summary>
-	/// <param name="command">Command</param>
-	/// <returns>byte[]</returns>
-	public byte[] GetCommandDefaultArgumentsBytes() {
-		return CommandHelper.GetCommandDefaultArgumentsBytes(this.Command);
-	}
-
-
-	/// <summary>
-	/// Get command packet bytes to send.
-	/// 
-	/// Packet is structured as:
-	/// 	- Expected data/response size bytes
-	/// 	- `12025` `ushort` constant (TODO: what is this for?)
-	/// 	- Command `ushort`
-	/// 	- Expected data/response size as integer
-	/// 	- Arguments (when none given explicitly, is data size again)
-	/// 	
-	/// Returns the array of bytes to send to the Band.
-	/// </summary>
-	/// <returns>byte[]</returns>
-	public byte[] GetBytes() {
-		ByteStream bytes = new ByteStream();
-		bytes.BinaryWriter.Write(this.GetArgsSizeBytes());
-		bytes.BinaryWriter.Write((ushort) 12025);
-		bytes.BinaryWriter.Write((ushort) this.Command);
-		bytes.BinaryWriter.Write(this.GetCommandDataSize());
-		bytes.BinaryWriter.Write(this.args);
-		return bytes.GetBytes();
-	}
-
-}
-
+            // Send Data if there is any
+            if (Data != null)
+                bytes.BinaryWriter.Write(Data);
+            return bytes.GetBytes();
+        }
+    }
 }

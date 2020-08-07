@@ -1,9 +1,8 @@
 using MSFTBandLib;
 using MSFTBandLib.Command;
-using MSFTBandLib.Facility;
-using MSFTBandLib.Libs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using MSFTBandLib.Contracts.Types;
 
 namespace MSFTBandLibTests {
 

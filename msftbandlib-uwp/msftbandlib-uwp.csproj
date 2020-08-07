@@ -132,6 +132,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\msftbandlib.Contracts\msftbandlib.Contracts.csproj">
+      <Project>{E488C536-4F0F-4477-83A2-B511A655330F}</Project>
+      <Name>msftbandlib.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\msftbandlib\msftbandlib.csproj">
       <Project>{576bc0de-1f70-4f6e-b00d-5357c333072a}</Project>
       <Name>msftbandlib</Name>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <AssemblyName>MSFTBandLib.Contracts</AssemblyName>
+    <RootNamespace>MSFTBandLib.Contracts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Atr\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\msftbandlib.Shared\msftbandlib.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
