@@ -1,119 +1,125 @@
-using MSFTBandLib;
 using MSFTBandLib.Command;
 using MSFTBandLib.Exceptions;
-using MSFTBandLib.Includes;
 using MSFTBandLib.Helpers;
 using MSFTBandLib.Metrics;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using MSFTBandLib.Contracts.Band;
+using MSFTBandLib.Contracts.Command;
+using MSFTBandLib.Contracts.Services;
+using MSFTBandLib.Contracts.Types;
+using MSFTBandLib.Services;
 
-namespace MSFTBandLib {
+namespace MSFTBandLib
+{
+    /// <summary>
+    /// Microsoft Band device class
+    /// 
+    /// Most methods will throw `BandConnectedNot` from the `Command` 
+    /// method when trying to access Bluetooth endpoints when not connected.
+    /// </summary>
+    public class Band<T> : IBandInterface
+        where T : class, IBandSocketInterface
+    {
+        #region Services
+        /// <summary>
+        /// Band personalization service
+        /// </summary>
+        public IPersonalizationService Personalization { get; }
 
-/// <summary>
-/// Microsoft Band device class
-/// 
-/// Most methods will throw `BandConnectedNot` from the `Command` 
-/// method when trying to access Bluetooth endpoints when not connected.
-/// </summary>
-public class Band<T> : BandInterface 
-where T : class, BandSocketInterface {
+        /// <summary>
+        /// Band Device Information Service
+        /// </summary>
+        public IDeviceInfoService DeviceInfo { get; }
 
-	/// <summary>MAC address</summary>
-	public string Mac { get; protected set; }
+        /// <summary>
+        /// Sleep information service
+        /// </summary>
+        public ISleepService Sleep { get; }
+        #endregion
 
-	///	<summary>Bluetooth name</summary>
-	public string Name { get; protected set; }
+        /// <summary>
+        /// Get currently connected
+        /// </summary>
+        public bool Connected
+        {
+            get => Connection.Connected;
+            set => throw new Exception("Can't change connection directly!");
+        }
 
-	/// <summary>Get currently connected</summary>
-	public bool Connected {
-		get => this.Connection.Connected;
-		set => throw new Exception("Can't change connection directly!");
-	}
+        /// <summary>
+        /// Band Bluetooth connection
+        /// </summary>
+        public BandConnection<T> Connection { get; protected set; }
 
-	/// <summary>Band Bluetooth connection</summary>
-	public BandConnection<T> Connection { get; protected set; }
+        /// <summary
+        /// >Construct a new device instance.
+        /// </summary>
+        /// <param name="mac">MAC address</param>
+        /// <param name="name">Bluetooth name</param>
+        public Band(string mac, string name)
+        {
+            Connection = new BandConnection<T>(this);
 
+            Sleep = new SleepService<T>(Connection);
+            DeviceInfo = new DeviceInfoService<T>(mac, name, Connection);
+            Personalization = new PersonalizationService<T>(Connection);
+        }
 
-	/// <summary>Construct a new device instance.</summary>
-	/// <param name="mac">MAC address</param>
-	/// <param name="name">Bluetooth name</param>
-	public Band(string mac, string name) {
-		this.Mac = mac;
-		this.Name = name;
-		this.Connection = new BandConnection<T>(this);
-	}
+        /// <summary>
+        /// Connect to the Band.
+        /// </summary>
+        /// <returns>Task</returns>
+        /// <exception cref="BandConnected">Band is connected.</exception>
+        public async Task Connect()
+        {
+            if (!Connected)
+            {
+                await Connection.Connect();
+            }
+            else throw new BandConnected();
+        }
 
+        /// <summary>
+        /// Disconnect from the Band.
+        /// </summary>
+        /// <returns>Task</returns>
+        /// <exception cref="BandConnectedNot">Band not connected.</exception>
+        public async Task Disconnect()
+        {
+            if (Connected)
+            {
+                await Connection.Disconnect();
+            }
+            else throw new BandConnectedNot();
+        }
 
-	/// <summary>Get MAC address.</summary>
-	/// <returns>string</returns>
-	public string GetMac() {
-		return this.Mac;
-	}
+        /// <summary>
+        /// Run a command using the Band's `BandConnection`.
+        /// </summary>
+        /// <param name="command">Command to run</param>
+        /// <returns>Task<CommandResponse></returns>
+        /// <exception cref="BandConnectedNot">Band not connected.</exception>
+        public async Task<ICommandResponse> Command(CommandEnum command)
+        {
+            if (!Connected) throw new BandConnectedNot();
+            
+            return await Connection.Command(command);
+        }
 
-
-	/// <summary>Get Bluetooth name.</summary>
-	/// <returns>string</returns>
-	public string GetName() {
-		return this.Name;
-	}
-
-
-	/// <summary>Connect to the Band.</summary>
-	/// <returns>Task</returns>
-	/// <exception cref="BandConnected">Band is connected.</exception>
-	public async Task Connect() {
-		if (!this.Connected) {
-			await this.Connection.Connect();
-		}
-		else throw new BandConnected();
-	}
-
-
-	/// <summary>Disconnect from the Band.</summary>
-	/// <returns>Task</returns>
-	/// <exception cref="BandConnectedNot">Band not connected.</exception>
-	public async Task Disconnect() {
-		if (this.Connected) {
-			await this.Connection.Disconnect();
-		}
-		else throw new BandConnectedNot();
-	}
-
-
-	/// <summary>Run a command using the Band's `BandConnection`.</summary>
-	/// <param name="Command">Command to run</param>
-	/// <returns>Task<CommandResponse></returns>
-	/// <exception cref="BandConnectedNot">Band not connected.</exception>
-	public async Task<CommandResponse> Command(CommandEnum Command) {
-		if (!this.Connected) throw new BandConnectedNot();
-		else return await this.Connection.Command(Command);
-	}
-
-
-	/// <summary>Get the current device time.</summary>
-	/// <returns>Task<DateTime></returns>
-	public async Task<DateTime> GetDeviceTime() {
-		var res = await this.Command(CommandEnum.GetDeviceTime);
-		return TimeHelper.DateTimeResponse(((CommandResponse)res));
-	}
-
-
-	/// <summary>Get last sleep.</summary>
-	/// <returns>Task<Sleep></returns>
-	public async Task<Sleep> GetLastSleep() {
-		var res = await this.Command(CommandEnum.GetStatisticsSleep);
-		return new Sleep(((CommandResponse)res));
-	}
-
-
-	/// <summary>Get serial number from the Band.</summary>
-	/// <returns>Task<String></returns>
-	public async Task<string> GetSerialNumber() {
-		var res = await this.Command(CommandEnum.GetSerialNumber);
-		return ((CommandResponse)res).GetByteStream().GetString();
-	}
-
-}
-
+        /// <summary>
+        /// Run a command using the Band's `BandConnection`.
+        /// </summary>
+        /// <param name="command">Command to run</param>
+        /// <param name="arguments">Arguments</param>
+        /// <param name="data">Data</param>
+        /// <returns>Task<CommandResponse></returns>
+        /// <exception cref="BandConnectedNot">Band not connected.</exception>
+        public async Task<ICommandResponse> Command(CommandEnum command, byte[] arguments, byte[] data = null)
+        {
+            if (!Connected) throw new BandConnectedNot();
+            
+            return await Connection.Command(command, arguments, data);
+        }
+    }
 }

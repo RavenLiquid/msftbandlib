@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
@@ -25,5 +25,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;7035</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="src\Command\CommandEnum.cs" />
+    <Compile Remove="src\IBandClientInterface.cs" />
+    <Compile Remove="src\IBandConnectionInterface.cs" />
+    <Compile Remove="src\IBandInterface.cs" />
+    <Compile Remove="src\IBandSocketInterface.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\msftbandlib.Contracts\msftbandlib.Contracts.csproj" />
+  </ItemGroup>
 
 </Project>

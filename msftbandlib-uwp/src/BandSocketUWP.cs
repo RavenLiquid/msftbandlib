@@ -16,7 +16,7 @@ namespace MSFTBandLib.UWP {
 /// <summary>
 /// Band socket UWP implementation
 /// </summary>
-public class BandSocketUWP : BandSocketInterface {
+public class BandSocketUWP : IBandSocketInterface {
 
 	/// <summary>Socket</summary>
 	protected StreamSocket Socket;

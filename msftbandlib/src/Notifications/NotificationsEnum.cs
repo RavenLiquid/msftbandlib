@@ -1,36 +1,36 @@
-namespace MSFTBandLib.Notifications {
+namespace MSFTBandLib.Notifications
+{
+    /// <summary>
+    /// Notification IDs
+    /// </summary>
+    public enum NotificationsEnum : ushort
+    {
+        SMS = 1,
 
-/// <summary>Notification IDs</summary>
-public enum NotificationsEnum : ushort {
+        Email = 2,
 
-	SMS = 1,
+        CalendarAddEvent = 16,
 
-	Email = 2,
+        CalendarClear = 17,
 
-	CalendarAddEvent = 16,
+        CallAnswered = 12,
 
-	CalendarClear = 17,
+        CallHangup = 14,
 
-	CallAnswered = 12,
+        CallIncoming = 11,
 
-	CallHangup = 14,
+        CallMissed = 13,
 
-	CallIncoming = 11,
+        GenericDialog = 100,
 
-	CallMissed = 13,
+        GenericPageClear = 103,
 
-	GenericDialog = 100,
+        GenericTileClear = 102,
 
-	GenericPageClear = 103,
+        GenericUpdate = 101,
 
-	GenericTileClear = 102,
+        Messaging = 8,
 
-	GenericUpdate = 101,
-
-	Messaging = 8,
-
-	Voicemail = 15
-
-}
-
+        Voicemail = 15
+    }
 }

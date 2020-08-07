@@ -1,115 +1,112 @@
-namespace MSFTBandLib.Command {
+namespace MSFTBandLib.Command
+{
+    /// <summary>
+    /// Commands
+    /// </summary>
+    public enum CommandEnum : ushort
+    {
+        ChunkCounts = 35977,
 
-/// <summary>Commands</summary>
-public enum CommandEnum : ushort {
+        ChunkRangeDelete = 35856,
 
-	ChunkCounts = 35977,
+        ChunkRangeGetData = 35983,
 
-	ChunkRangeDelete = 35856,
+        ChunkRangeGetMetadata = 35982,
 
-	ChunkRangeGetData = 35983,
+        FlushLog = 35853,
 
-	ChunkRangeGetMetadata = 35982,
+        GetApiVersion = 30342,
 
-	FlushLog = 35853,
+        GetDeviceName = 30339,
 
-	GetApiVersion = 30342,
+        [CommandDataSize(16)] GetDeviceTime = 30082,
 
-	GetDeviceName = 30339,
+        GetLogVersion = 30341,
 
-	[CommandDataSize(16)]
-	GetDeviceTime = 30082,
+        GetMaxTileCount = 54421,
 
-	GetLogVersion = 30341,
+        GetMaxTileCountAllocated = 54422,
 
-	GetMaxTileCount = 54421,
+        GetMeTileImage = 50062,
 
-	GetMaxTileCountAllocated = 54422,
+        GetMeTileImageId = 51858,
 
-	GetMeTileImage = 50062,
+        GetSdkVersion = 30215,
 
-	GetMeTileImageId = 51858,
+        [CommandDataSize(12)] GetSerialNumber = 30856,
 
-	GetSdkVersion = 30215,
+        GetSettingsMask = 54413,
 
-	[CommandDataSize(12)]
-	GetSerialNumber = 30856,
+        GetStatisticsRun = 52866,
 
-	GetSettingsMask = 54413,
+        [CommandDataSize(54)] GetStatisticsSleep = 52868,
 
-	GetStatisticsRun = 52866,
+        GetStatisticsWorkout = 52867,
 
-	[CommandDataSize(54)]
-	GetStatisticsSleep = 52868,
+        GetStatisticsWorkoutGuided = 52869,
 
-	GetStatisticsWorkout = 52867,
+        GetTile = 54407,
 
-	GetStatisticsWorkoutGuided = 52869,
+        GetTiles = 54400,
 
-	GetTile = 54407,
+        GetTilesDefaults = 54404,
 
-	GetTiles = 54400,
+        GetTilesNoImages = 54418,
 
-	GetTilesDefaults = 54404,
+        GetUniqueId = 30337,
 
-	GetTilesNoImages = 54418,
+        Notification = 52224,
 
-	GetUniqueId = 30337,
+        OobeFinalise = 44290,
 
-	Notification = 52224,
+        OobeGetComplete = 51859,
 
-	OobeFinalise = 44290,
+        OobeSetComplete = 51713,
 
-	OobeGetComplete = 51859,
+        OobeGetStage = 44417,
 
-	OobeSetComplete = 51713,
+        OobeSetStage = 44288,
 
-	OobeGetStage = 44417,
+        ProfileGetDataApp = 50566,
 
-	OobeSetStage = 44288,
+        ProfileGetDataFw = 50568,
 
-	ProfileGetDataApp = 50566,
+        ProfileSetDataApp = 50439,
 
-	ProfileGetDataFw = 50568,
+        ProfileSetDataFw = 50441,
 
-	ProfileSetDataApp = 50439,
+        SetDeviceTime = 29953,
 
-	ProfileSetDataFw = 50441,
+        SetMeTileImage = 49937,
 
-	SetDeviceTime = 29953,
+        SetSettingsMask = 54286,
 
-	SetMeTileImage = 49937,
+        [CommandDataSize(24)] SetThemeColor = 55296,
 
-	SetSettingsMask = 54286,
+        SetTile = 54278,
 
-	SetThemeColor = 55296,
+        SetTiles = 54273,
 
-	SetTile = 54278,
+        StartStripSyncEnd = 54275,
 
-	SetTiles = 54273,
+        StartStripSyncStart = 54274,
 
-	StartStripSyncEnd = 54275,
+        Subscribe = 36608,
 
-	StartStripSyncStart = 54274,
+        SubscriptionGetData = 36739,
 
-	Subscribe = 36608,
+        SubscriptionGetDataLength = 36738,
 
-	SubscriptionGetData = 36739,
+        SubscriptionSubscribeId = 36615,
 
-	SubscriptionGetDataLength = 36738,
+        SubscriptionUnsubscribeId = 36616,
 
-	SubscriptionSubscribeId = 36615,
+        TilesDisableSetting = 54288,
 
-	SubscriptionUnsubscribeId = 36616,
+        TilesEnableSetting = 54287,
 
-	TilesDisableSetting = 54288,
+        UINavigateScreen = 49920,
 
-	TilesEnableSetting = 54287,
-
-	UINavigateScreen = 49920,
-
-	Unsubscribe = 36609
-
-}
-
+        Unsubscribe = 36609
+    }
 }

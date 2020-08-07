@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>msftbandlib.dotnetcore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.19041.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\msftbandlib\msftbandlib.csproj" />
+  </ItemGroup>
+
+</Project>

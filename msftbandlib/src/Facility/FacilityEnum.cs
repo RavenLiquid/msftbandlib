@@ -1,248 +1,249 @@
-namespace MSFTBandLib.Facility {
+namespace MSFTBandLib.Facility
+{
+    /// <summary>
+    /// Facility identifiers
+    /// </summary>
+    public enum FacilityEnum : int
+    {
 
-/// <summary>Facility identifiers</summary>
-public enum FacilityEnum : int {
+        Invalid = 0,
 
-    Invalid = 0,
+        ReservedBase = 1,
 
-    ReservedBase = 1,
+        ReservedEnd = 31,
 
-    ReservedEnd = 31,
+        DriverDma = 32,
 
-    DriverDma = 32,
+        DriverBtle = 33,
 
-    DriverBtle = 33,
+        DriverPdb = 34,
 
-    DriverPdb = 34,
+        DriverI2c = 35,
 
-    DriverI2c = 35,
+        DriverAdc = 36,
 
-    DriverAdc = 36,
+        DriverGpio = 37,
 
-    DriverGpio = 37,
+        DriverDac = 38,
 
-    DriverDac = 38,
+        DriverAnalogMgr = 39,
 
-    DriverAnalogMgr = 39,
+        DriverRtc = 40,
 
-    DriverRtc = 40,
+        DriverMotor = 41,
 
-    DriverMotor = 41,
+        DriverDisplay = 43,
 
-    DriverDisplay = 43,
+        DriverUartAsync = 44,
 
-    DriverUartAsync = 44,
+        DriverPmu = 45,
 
-    DriverPmu = 45,
+        DriverExternalRam = 46,
 
-    DriverExternalRam = 46,
+        DriverAls = 47,
 
-    DriverAls = 47,
+        DriverTimers = 48,
 
-    DriverTimers = 48,
+        DriverFlexBus = 49,
 
-    DriverFlexBus = 49,
+        DriverSpi = 50,
 
-    DriverSpi = 50,
+        DriverEFlash = 51,
 
-    DriverEFlash = 51,
+        DriverPwm = 52,
 
-    DriverPwm = 52,
+        DriverCrc = 53,
 
-    DriverCrc = 53,
+        DriverPFlash = 54,
 
-    DriverPFlash = 54,
+        DriverFpu = 55,
 
-    DriverFpu = 55,
+        DriverCoreModule = 56,
 
-    DriverCoreModule = 56,
+        DriverCrashDump = 57,
 
-    DriverCrashDump = 57,
+        DriverUsb = 58,
 
-    DriverUsb = 58,
+        DriverMmcau = 59,
 
-    DriverMmcau = 59,
+        DriversEnd = 111,
 
-    DriversEnd = 111,
+        LibraryDebug = 112,
 
-    LibraryDebug = 112,
+        LibraryRuntime = 113,
 
-    LibraryRuntime = 113,
+        LibraryUsbCmdProtocol = 114,
 
-    LibraryUsbCmdProtocol = 114,
+        LibraryBTPS = 115,
 
-    LibraryBTPS = 115,
+        LibraryTouch = 116,
 
-    LibraryTouch = 116,
+        LibraryTime = 117,
 
-    LibraryTime = 117,
+        LibraryJutil = 118,
 
-    LibraryJutil = 118,
+        LibraryHRManager = 119,
 
-    LibraryHRManager = 119,
+        LibraryConfiguration = 120,
 
-    LibraryConfiguration = 120,
+        LibraryButton = 121,
 
-    LibraryButton = 121,
+        LibraryBacklight = 122,
 
-    LibraryBacklight = 122,
+        LibraryMotion = 123,
 
-    LibraryMotion = 123,
+        LibraryActMon = 124,
 
-    LibraryActMon = 124,
+        LibraryBattery = 125,
 
-    LibraryBattery = 125,
+        LibraryGps = 126,
 
-    LibraryGps = 126,
+        LibraryHRLed = 127,
 
-    LibraryHRLed = 127,
+        LibraryDfu = 128,
 
-    LibraryDfu = 128,
+        LibraryHeartRate = 129,
 
-    LibraryHeartRate = 129,
+        LibraryMicrophone = 131,
 
-    LibraryMicrophone = 131,
+        LibraryGsr = 132,
 
-    LibraryGsr = 132,
+        LibraryUV = 133,
 
-    LibraryUV = 133,
+        LibrarySkinTemp = 134,
 
-    LibrarySkinTemp = 134,
+        LibraryAmbTemp = 135,
 
-    LibraryAmbTemp = 135,
+        LibraryPedometer = 136,
 
-    LibraryPedometer = 136,
+        LibraryCalories = 137,
 
-    LibraryCalories = 137,
+        LibraryDistance = 138,
 
-    LibraryDistance = 138,
+        LibraryAlgoMath = 139,
 
-    LibraryAlgoMath = 139,
+        LibraryLogger = 140,
 
-    LibraryLogger = 140,
+        LibraryPeg = 141,
 
-    LibraryPeg = 141,
+        LibraryFile = 142,
 
-    LibraryFile = 142,
+        LibraryRemoteSubscription = 143,
 
-    LibraryRemoteSubscription = 143,
+        LibraryPower = 144,
 
-    LibraryPower = 144,
+        LibraryUVExposure = 145,
 
-    LibraryUVExposure = 145,
+        LibraryMinuteTimer = 146,
 
-    LibraryMinuteTimer = 146,
+        LibraryRecovery = 147,
 
-    LibraryRecovery = 147,
+        LibrarySubscriptionBase = 148,
 
-    LibrarySubscriptionBase = 148,
+        LibraryDateChangeSubscription = 149,
 
-    LibraryDateChangeSubscription = 149,
+        LibraryHREstimator = 150,
 
-    LibraryHREstimator = 150,
+        LibraryUSBConnection = 151,
 
-    LibraryUSBConnection = 151,
+        LibrarySRAMFWUpdate = 152,
 
-    LibrarySRAMFWUpdate = 152,
+        LibraryAutoBrightness = 153,
 
-    LibraryAutoBrightness = 153,
+        LibraryHaptic = 154,
 
-    LibraryHaptic = 154,
+        LibraryFitnessPlans = 155,
 
-    LibraryFitnessPlans = 155,
+        LibrarySleepRecovery = 156,
 
-    LibrarySleepRecovery = 156,
+        LibraryFirstBeat = 157,
 
-    LibraryFirstBeat = 157,
+        LibraryAncsNotificationCache = 158,
 
-    LibraryAncsNotificationCache = 158,
+        LibraryKeyboard = 159,
 
-    LibraryKeyboard = 159,
+        LibraryHrAccelSync = 160,
 
-    LibraryHrAccelSync = 160,
+        LibraryGolf = 161,
 
-    LibraryGolf = 161,
+        ModuleOobe = 173,
 
-    ModuleOobe = 173,
+        LibrariesEnd = 191,
 
-    LibrariesEnd = 191,
+        ModuleMain = 192,
 
-    ModuleMain = 192,
+        ModuleBehavior = 193,
 
-    ModuleBehavior = 193,
+        ModuleFireballTransportLayer = 194,
 
-    ModuleFireballTransportLayer = 194,
+        ModuleFireballUI = 195,
 
-    ModuleFireballUI = 195,
+        ModuleFireballUtilities = 196,
 
-    ModuleFireballUtilities = 196,
+        ModuleProfile = 197,
 
-    ModuleProfile = 197,
+        ModuleLoggerSubscriptions = 198,
 
-    ModuleLoggerSubscriptions = 198,
+        ModuleFireballTilesModels = 199,
 
-    ModuleFireballTilesModels = 199,
+        ModulePowerManager = 200,
 
-    ModulePowerManager = 200,
+        ModuleHrPowerManager = 201,
 
-    ModuleHrPowerManager = 201,
+        ModuleSystemSettings = 202,
 
-    ModuleSystemSettings = 202,
+        ModuleFireballHardwareManager = 203,
 
-    ModuleFireballHardwareManager = 203,
+        ModuleNotification = 204,
 
-    ModuleNotification = 204,
+        ModuleFtlTouchManager = 205,
 
-    ModuleFtlTouchManager = 205,
+        ModulePersistedStatistics = 206,
 
-    ModulePersistedStatistics = 206,
+        ModuleAlgorithms = 207,
 
-    ModuleAlgorithms = 207,
+        ModulePersistedApplicationData = 208,
 
-    ModulePersistedApplicationData = 208,
+        ModuleDeviceContact = 209,
 
-    ModuleDeviceContact = 209,
+        ModuleInstrumentation = 210,
 
-    ModuleInstrumentation = 210,
+        ModuleFireballAppsManagement = 211,
 
-    ModuleFireballAppsManagement = 211,
+        ModuleInstalledAppList = 212,
 
-    ModuleInstalledAppList = 212,
+        ModuleFireballPageManagement = 213,
 
-    ModuleFireballPageManagement = 213,
+        ModuleUnitTests = 214,
 
-    ModuleUnitTests = 214,
+        ModuleBatteryGauge = 215,
 
-    ModuleBatteryGauge = 215,
+        ModuleThemeColor = 216,
 
-    ModuleThemeColor = 216,
+        ModuleGoalTracker = 217,
 
-    ModuleGoalTracker = 217,
+        ModuleKfrost = 218,
 
-    ModuleKfrost = 218,
+        ModulePal = 219,
 
-    ModulePal = 219,
+        ModuleGestures = 220,
 
-    ModuleGestures = 220,
+        ModuleCortana = 221,
 
-    ModuleCortana = 221,
+        ModuleVoicePush = 222,
 
-    ModuleVoicePush = 222,
+        ModulesEnd = 223,
 
-    ModulesEnd = 223,
+        ApplicationMain = 224,
 
-    ApplicationMain = 224,
+        Application1BL = 225,
 
-    Application1BL = 225,
+        Application2UP = 226,
 
-    Application2UP = 226,
+        ApplicationsEnd = 239,
 
-    ApplicationsEnd = 239,
+        Reserved2Base = 240,
 
-    Reserved2Base = 240,
-
-    Reserved2End = 255,
-
-}
-
+        Reserved2End = 255,
+    }
 }

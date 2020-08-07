@@ -12,17 +12,17 @@ namespace MSFTBandLib.UWP {
 /// <summary>
 /// MSFTBandLib UWP implementation
 /// </summary>
-public class BandClientUWP : BandClientInterface {
+public class BandClientUWP : IBandClientInterface {
 
 	/// <summary>
 	///	Get list of all available paired Bands.
 	/// </summary>
 	/// <returns>Task<List<Band>></returns>
-	public async Task<List<BandInterface>> GetPairedBands() {
+	public async Task<List<IBandInterface>> GetPairedBands() {
 		string selector;
 		RfcommServiceId cargo;
 		DeviceInformationCollection devices;
-		List<BandInterface> bands = new List<BandInterface>();
+		List<IBandInterface> bands = new List<IBandInterface>();
 
 		// Get devices
 		cargo = RfcommServiceId.FromUuid(Guid.Parse(Services.CARGO));

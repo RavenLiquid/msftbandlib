@@ -44,9 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="MSFTBandLib">
-      <HintPath>..\msftbandlib\bin\Debug\netstandard1.4\MSFTBandLib.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\msftbandlib\msftbandlib.csproj" />
   </ItemGroup>
 
 </Project>

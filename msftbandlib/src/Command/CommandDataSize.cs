@@ -1,21 +1,24 @@
 using System;
 
-namespace MSFTBandLib.Command {
+namespace MSFTBandLib.Command
+{
+    /// <summary>
+    /// Command data size attribute
+    /// </summary>
+    public class CommandDataSize : Attribute
+    {
+        /// <summary>
+        /// Assigned data size
+        /// </summary>
+        public int DataSize { get; protected set; }
 
-/// <summary>Command data size attribute</summary>
-public class CommandDataSize : Attribute {
-
-	/// <summary>Assigned data size</summary>
-	public int DataSize { get; protected set; }
-
-
-	/// <summary>Command data size constructor.</summary>
-	/// <param name="DataSize">Assigned data size</param>
-	/// <returns>public</returns>
-	public CommandDataSize(int DataSize) {
-		this.DataSize = DataSize;
-	}
-
-}
-
+        /// <summary>
+        /// Command data size constructor.
+        /// </summary>
+        /// <param name="dataSize">Assigned data size</param>
+        public CommandDataSize(int dataSize)
+        {
+            DataSize = dataSize;
+        }
+    }
 }
