@@ -164,5 +164,16 @@ namespace MSFTBandLib.Contracts.Constants
             4279571733, 4294111986, 4279308561, 4286217340, 4280624421, 4281545523
         };
 
+        // Contrasting random colors to test correct colors are sent. All colors are the basecolor from other themes
+        public static uint[] TEST =
+        {
+            4292430950, // CORAL
+            4281558732, // CORNFLOWER
+            4281974639, // CYBER
+            4286071503, // CARGO
+            4294417174, // TANGERINENEON
+            4288268308, // LIME
+        };
+
     }
 }

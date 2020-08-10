@@ -19,9 +19,9 @@ namespace MSFTBandLib.src
 
         /// <inheritdoc />
         public void SetColors(uint[] colors)
-        {
+        { 
             BaseColor = colors[0];
-            HighContrast = colors[1];
+            Highlight = colors[1];
             Lowlight = colors[2];
             SecondaryText = colors[3];
             HighContrast = colors[4];
@@ -29,7 +29,7 @@ namespace MSFTBandLib.src
         }
 
         /// <inheritdoc />
-        public uint[] GetColors()
+        uint[] ITheme.GetColors()
         {
             return new[] {BaseColor, Highlight, Lowlight, SecondaryText, HighContrast, Muted};
         }

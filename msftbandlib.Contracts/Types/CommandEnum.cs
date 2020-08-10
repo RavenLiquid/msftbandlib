@@ -83,12 +83,28 @@ namespace MSFTBandLib.Contracts.Types
 
         SetDeviceTime = 29953,
 
+        [CommandDataSize(79360)]
         SetMeTileImage = 49937,
+
+        //[CommandDataSize(79360)]
+        ClearMeTileImage = 49927,
 
         SetSettingsMask = 54286,
 
-        [CommandDataSize(24)] 
+        [CommandDataSize(24)] //24
         SetThemeColor = 55296,
+
+        [CommandDataSize(24)] //24
+        SetCustomThemeColor = 55298,
+
+        [CommandDataSize(24)] //24
+        SetCustomThemeColorByIndex = 55299,
+
+        [CommandDataSize(24)] //24
+        GetThemeColor = 55297,
+
+        [CommandDataSize(0)]
+        ResetThemeColor = 55300,
 
         SetTile = 54278,
 
